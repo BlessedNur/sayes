@@ -1,8 +1,13 @@
+// components/sections/WhatWeOfferSection.tsx (keep 'use client' due to state and effects)
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
-export default function WhatWeOfferSection(): JSX.Element {
+interface WhatWeOfferSectionProps {
+  dict: any;
+}
+
+export default function WhatWeOfferSection({ dict }: WhatWeOfferSectionProps): JSX.Element {
   const [activeOption, setActiveOption] = useState('personal-coaching');
   const [isAnimating, setIsAnimating] = useState(false);
   const [lastManualSelection, setLastManualSelection] = useState<string | null>(null);
@@ -12,31 +17,27 @@ export default function WhatWeOfferSection(): JSX.Element {
   const options = [
     {
       id: 'personal-coaching',
-      title: 'Personal Coaching',
+      title: dict.personal_coaching,
       image: '/new/offer1.jpg',
-      description:
-        'Our Personal coaching sessions with our coaches deliver customized workout plans, one-on-one coaching, and training guidance tailored to your goals. We help you track your progress through the regular meetings, receive ongoing accountability, and tap into expert support every step of the way Ready to transform? Book your free assessment today and start your journey to peak performance!',
+      description: dict.personal_coaching_description,
     },
     {
       id: 'skill-development',
-      title: 'Skill Development',
+      title: dict.skill_development,
       image: '/new/offer3.jpg',
-      description:
-        'Our Skill Development programs are part of some of our packages where we help to sharpen your athletic toolkit with targeted drills, mental performance coaching, and technique breakdowns tailored to your sport. Gain mastery in agility, reaction time, speed and explosiveness Ready to elevate your game? Book your free assessment today and start your journey to peak performance!..',
+      description: dict.skill_development_description,
     },
     {
       id: 'group-training',
-      title: 'Group Training',
+      title: dict.group_training,
       image: '/new/offer4.jpg',
-      description:
-        'Our Small Group Training pairs expert coaching with the team spirit of a tight team. In groups of 4-6, you’ll tackle sport-specific circuits, exercise techniques, and goal-driven workouts designed to help you become a better athlete. Enjoy personalized feedback, friendly competition, and a supportive atmosphere. Join our group sessions and level up together—reserve your spot now!',
+      description: dict.group_training_description,
     },
     {
       id: 'training-camps',
-      title: 'Training Camps',
+      title: dict.training_camps,
       image: '/new/offer5.jpg',
-      description:
-        'Our Training Camps are high-intensity, multi-day experiences built to improve your athletic growth. Designed for youth and competitive athletes, each camp focuses on advanced skill development, physical conditioning, mental performance, and tactical training - all led by elite coaches. With video feedback, team challenges, and individual assessments, athletes leave stronger, smarter, and more confident Stay tuned for our upcoming training camps..',
+      description: dict.training_camps_description,
     },
   ];
 
@@ -91,48 +92,47 @@ export default function WhatWeOfferSection(): JSX.Element {
               if (!isAnimating && targetOptionId !== activeOption) {
                 setIsAnimating(true);
                 setActiveOption(targetOptionId);
-                setTimeout(() => setIsAnimating(false), 700);
+                setTimeout(() => setIsAnimating(false), 500);
               }
             }
           } else {
             if (!isAnimating && targetOptionId !== activeOption) {
               setIsAnimating(true);
               setActiveOption(targetOptionId);
-              setTimeout(() => setIsAnimating(false), 700);
+              setTimeout(() => setIsAnimating(false), 500);
             }
           }
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile, options, lastManualSelection, activeOption, isAnimating]);
+  }, [activeOption, isAnimating, lastManualSelection, isMobile, options]);
 
   const handleOptionClick = (id: string) => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      setActiveOption(id);
-      setLastManualSelection(id);
-      setTimeout(() => setIsAnimating(false), 700);
-    }
+    setLastManualSelection(id);
+    setActiveOption(id);
   };
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#f7f7f7] py-20" id='offer'>
+    <section
+      ref={sectionRef}
+      className="w-full py-[40px] sm:py-[60px] md:py-[80px] lg:py-[100px] bg-[#f7f7f7] rounded-[5px]"
+      id="offer"
+    >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Full content display for screens up to 800px */}
         {isMobile ? (
-          <div className="flex flex-col gap-12">
-            <h2 className="text-[26px] sm:text-[34px] font-bold leading-[31px] sm:leading-[41px] text-[#120088] font-inter text-center">
-              What we Offer
+          <div className="flex flex-col gap-8">
+            <h2 className="text-[26px] sm:text-[34px] md:text-[42px] font-bold leading-[31px] sm:leading-[41px] md:leading-[51px] text-[#120088] text-center font-inter">
+              {dict.what_we_offer}
             </h2>
             {options.map((option) => (
-              <div key={option.id} className="flex flex-col gap-6 items-center w-full">
-                <h3 className="text-[22px] sm:text-[28px] font-bold leading-[26px] sm:leading-[34px] text-[#120088] font-inter text-center">
+              <div key={option.id} className="flex flex-col items-center">
+                <h3 className="text-[22px] sm:text-[28px] md:text-[36px] font-bold leading-[26px] sm:leading-[34px] md:leading-[44px] text-[#120088] mb-4 font-inter">
                   {option.title}
                 </h3>
-                <div className="w-full h-auto rounded-[15px] overflow-hidden shadow-lg">
+                <div className="w-full h-auto rounded-[15px] overflow-hidden shadow-lg mb-4">
                   <Image
                     src={option.image}
                     alt={option.title}
@@ -141,18 +141,17 @@ export default function WhatWeOfferSection(): JSX.Element {
                     className="w-full h-auto rounded-[15px]"
                   />
                 </div>
-                <p className="text-[14px] sm:text-[16px] font-medium text-[#3c3c3c] font-inter">
+                <p className="text-[14px] sm:text-[16px] md:text-[18px] font-medium text-[#3c3c3c] w-full mb-8 font-inter">
                   {option.description}
                 </p>
               </div>
             ))}
           </div>
         ) : (
-          /* Interactive display for screens above 800px */
-          <div className="flex flex-col lg:flex-row justify-center items-start w-full">
+          <div className="flex flex-row justify-between items-start w-full gap-[20px] lg:gap-[44px]">
             <div className="flex flex-col gap-[22px] sm:gap-[33px] md:gap-[44px] justify-start items-start w-full lg:w-[44%] mt-0 lg:mt-[20px] mb-8 lg:mb-0">
               <h2 className="hidden lg:block text-[26px] sm:text-[34px] md:text-[42px] font-bold leading-[31px] sm:leading-[41px] md:leading-[51px] text-[#120088] font-inter">
-                What we Offer
+                {dict.what_we_offer}
               </h2>
               <div
                 ref={optionsRef}

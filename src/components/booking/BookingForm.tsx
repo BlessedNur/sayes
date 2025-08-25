@@ -1,3 +1,4 @@
+// components/sections/BookingForm.tsx (keep 'use client' due to form state)
 'use client';
 import React, { useState } from 'react';
 import { Calendar, ChevronDown, Send } from 'lucide-react';
@@ -31,9 +32,10 @@ interface FormErrors {
 interface BookingFormProps {
   packageId: number;
   packageTitle: string;
+  dict: any; // Type this better if possible, e.g., import from dictionary type
 }
 
-export default function BookingForm({ packageId, packageTitle }: BookingFormProps): JSX.Element {
+export default function BookingForm({ packageId, packageTitle, dict }: BookingFormProps): JSX.Element {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     dateOfBirth: '',
@@ -53,17 +55,17 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
 
   const validate = (): FormErrors => {
     let newErrors: FormErrors = {};
-    if (!formData.fullName) newErrors.fullName = 'Full Name is required.';
-    if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of Birth is required.';
+    if (!formData.fullName) newErrors.fullName = dict.full_name_required;
+    if (!formData.dateOfBirth) newErrors.dateOfBirth = dict.date_of_birth_required;
     if (!formData.email) {
-      newErrors.email = 'Email is required.';
+      newErrors.email = dict.email_required;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email address is invalid.';
+      newErrors.email = dict.email_invalid;
     }
-    if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required.';
-    if (!formData.sports) newErrors.sports = 'Sports selection is required.';
-    if (!formData.trainingGoals) newErrors.trainingGoals = 'Training Goals selection is required.';
-    if (!formData.preferredTrainingDays) newErrors.preferredTrainingDays = 'Preferred Training Days is required.';
+    if (!formData.phoneNumber) newErrors.phoneNumber = dict.phone_number_required;
+    if (!formData.sports) newErrors.sports = dict.sports_required;
+    if (!formData.trainingGoals) newErrors.trainingGoals = dict.training_goals_required;
+    if (!formData.preferredTrainingDays) newErrors.preferredTrainingDays = dict.preferred_training_days_required;
     return newErrors;
   };
 
@@ -118,48 +120,32 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
           preferredTrainingDays: '',
           additionalMessage: '',
         });
-        setErrors({});
       } else {
-        throw new Error('Failed to send email.');
+        setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const inputClass = "w-full px-4 py-3 border border-gray-600 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent rounded-none text-lg";
-  const labelClass = "block text-lg font-medium text-black mb-2";
-  const errorClass = "text-red-500 text-sm mt-1";
-  const selectClass = "w-full px-4 py-3 border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none rounded-none text-lg";
+  const inputClass = 'w-full px-4 py-3 border border-gray-300 rounded-none bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none';
+  const selectClass = 'w-full px-4 py-3 border border-gray-300 rounded-none bg-white appearance-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none';
+  const labelClass = 'block mb-2 text-sm font-medium text-gray-700';
+  const errorClass = 'mt-1 text-sm text-red-600';
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center">
-      <div className="w-full max-wxl bg-white p-6 px-4 md:p-16  border border-gray-200">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 border border-black rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <h2 className="md:text-2xl text-xl font-semibold text-black">Complete Your Profile</h2>
-          </div>
-        </div>
-
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl bg-white shadow-lg p-8">
+        <h1 className="text-2xl font-bold mb-6 text-center">{dict.book_your_session}</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className={labelClass}>Full Name</label>
+              <label className={labelClass}>{dict.full_name}</label>
               <input
                 type="text"
-                placeholder="Your Full Name"
+                placeholder={dict.full_name_placeholder}
                 value={formData.fullName}
                 onChange={(e) => handleInputChange('fullName', e.target.value)}
                 className={inputClass}
@@ -168,24 +154,24 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
             </div>
 
             <div>
-              <label className={labelClass}>Date of Birth</label>
+              <label className={labelClass}>{dict.date_of_birth}</label>
               <div className="relative">
                 <input
                   type="date"
                   value={formData.dateOfBirth}
                   onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                  className={`${inputClass} pr-12`}
+                  className={`${inputClass} appearance-none`}
                 />
-                <Calendar className="absolute right-4 top-3.5 w-6 h-6 text-gray-400 pointer-events-none" />
+                <Calendar className="absolute right-4 top-3.5 w-5 h-5 text-gray-400 pointer-events-none" />
               </div>
               {errors.dateOfBirth && <p className={errorClass}>{errors.dateOfBirth}</p>}
             </div>
 
             <div>
-              <label className={labelClass}>Email</label>
+              <label className={labelClass}>{dict.email}</label>
               <input
                 type="email"
-                placeholder="Your Email"
+                placeholder={dict.email_placeholder}
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 className={inputClass}
@@ -194,10 +180,10 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
             </div>
 
             <div>
-              <label className={labelClass}>Phone Number</label>
+              <label className={labelClass}>{dict.phone_number}</label>
               <input
                 type="tel"
-                placeholder="Your Phone Number"
+                placeholder={dict.phone_number_placeholder}
                 value={formData.phoneNumber}
                 onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
                 className={inputClass}
@@ -206,21 +192,19 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
             </div>
 
             <div>
-              <label className={labelClass}>Sports</label>
+              <label className={labelClass}>{dict.sports}</label>
               <div className="relative">
                 <select
                   value={formData.sports}
                   onChange={(e) => handleInputChange('sports', e.target.value)}
                   className={selectClass}
                 >
-                  <option value="">e.g., Football, Tennis</option>
-                  <option value="football">Football</option>
-                  <option value="tennis">Tennis</option>
-                  <option value="basketball">Basketball</option>
-                  <option value="soccer">Soccer</option>
-                  <option value="swimming">Swimming</option>
-                  <option value="athletics">Athletics</option>
-                  <option value="other">Other</option>
+                  <option value="">{dict.sports_placeholder}</option>
+                  <option value="football">{dict.football}</option>
+                  <option value="basketball">{dict.basketball}</option>
+                  <option value="tennis">{dict.tennis}</option>
+                  <option value="swimming">{dict.swimming}</option>
+                  <option value="other">{dict.other}</option>
                 </select>
                 <ChevronDown className="absolute right-4 top-3.5 w-6 h-6 text-gray-400 pointer-events-none" />
               </div>
@@ -228,22 +212,21 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
             </div>
 
             <div>
-              <label className={labelClass}>Sports Club</label>
+              <label className={labelClass}>{dict.sports_club}</label>
               <input
                 type="text"
-                placeholder="e.g., Malmö FF"
+                placeholder={dict.sports_club_placeholder}
                 value={formData.sportsClub}
                 onChange={(e) => handleInputChange('sportsClub', e.target.value)}
                 className={inputClass}
               />
-              {errors.sportsClub && <p className={errorClass}>{errors.sportsClub}</p>}
             </div>
 
             <div>
-              <label className={labelClass}>Position</label>
+              <label className={labelClass}>{dict.position}</label>
               <input
                 type="text"
-                placeholder="e.g., Striker, Goalkeeper"
+                placeholder={dict.position_placeholder}
                 value={formData.position}
                 onChange={(e) => handleInputChange('position', e.target.value)}
                 className={inputClass}
@@ -251,21 +234,19 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
             </div>
 
             <div>
-              <label className={labelClass}>Training Goals</label>
+              <label className={labelClass}>{dict.training_goals}</label>
               <div className="relative">
                 <select
                   value={formData.trainingGoals}
                   onChange={(e) => handleInputChange('trainingGoals', e.target.value)}
                   className={selectClass}
                 >
-                  <option value="">e.g., Improve speed, Build strength</option>
-                  <option value="improve_speed">Improve Speed</option>
-                  <option value="build_strength">Build Strength</option>
-                  <option value="endurance">Improve Endurance</option>
-                  <option value="flexibility">Increase Flexibility</option>
-                  <option value="technique">Improve Technique</option>
-                  <option value="general_fitness">General Fitness</option>
-                  <option value="other">Other</option>
+                  <option value="">{dict.training_goals_placeholder}</option>
+                  <option value="strength">{dict.strength}</option>
+                  <option value="endurance">{dict.endurance}</option>
+                  <option value="speed">{dict.speed}</option>
+                  <option value="technique">{dict.technique}</option>
+                  <option value="other">{dict.other}</option>
                 </select>
                 <ChevronDown className="absolute right-4 top-3.5 w-6 h-6 text-gray-400 pointer-events-none" />
               </div>
@@ -273,22 +254,22 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
             </div>
 
             <div>
-              <label className={labelClass}>Preferred Training Days</label>
+              <label className={labelClass}>{dict.preferred_training_days}</label>
               <div className="relative">
                 <select
                   value={formData.preferredTrainingDays}
                   onChange={(e) => handleInputChange('preferredTrainingDays', e.target.value)}
                   className={selectClass}
                 >
-                  <option value="">e.g., Mon, Wed, Fri</option>
-                  <option value="monday">Monday</option>
-                  <option value="tuesday">Tuesday</option>
-                  <option value="wednesday">Wednesday</option>
-                  <option value="thursday">Thursday</option>
-                  <option value="friday">Friday</option>
-                  <option value="saturday">Saturday</option>
-                  <option value="sunday">Sunday</option>
-                  <option value="flexible">Flexible</option>
+                  <option value="">{dict.preferred_training_days_placeholder}</option>
+                  <option value="monday">{dict.monday}</option>
+                  <option value="tuesday">{dict.tuesday}</option>
+                  <option value="wednesday">{dict.wednesday}</option>
+                  <option value="thursday">{dict.thursday}</option>
+                  <option value="friday">{dict.friday}</option>
+                  <option value="saturday">{dict.saturday}</option>
+                  <option value="sunday">{dict.sunday}</option>
+                  <option value="flexible">{dict.flexible}</option>
                 </select>
                 <ChevronDown className="absolute right-4 top-3.5 w-6 h-6 text-gray-400 pointer-events-none" />
               </div>
@@ -297,9 +278,9 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
           </div>
 
           <div>
-            <label className={labelClass}>Additional Message</label>
+            <label className={labelClass}>{dict.additional_message}</label>
             <textarea
-              placeholder="Any additional information"
+              placeholder={dict.additional_message_placeholder}
               value={formData.additionalMessage}
               onChange={(e) => handleInputChange('additionalMessage', e.target.value)}
               rows={4}
@@ -313,26 +294,26 @@ export default function BookingForm({ packageId, packageTitle }: BookingFormProp
               onClick={() => window.history.back()}
               className="px-8 py-3 border-2 order-2 border-blue-400 text-blue-400 bg-transparent hover:bg-blue-400 hover:text-white transition-colors rounded-none font-bold"
             >
-              Cancel
+              {dict.cancel}
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
               className="px-8 py-3 order-1 bg-blue-400 text-white hover:bg-blue-500 transition-colors flex items-center justify-center space-x-2 rounded-none font-bold disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              <span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
+              <span>{isSubmitting ? dict.submitting : dict.submit}</span>
               <Send className="w-5 h-5" />
             </button>
           </div>
         </form>
         {submitStatus === 'success' && (
           <p className="text-center text-green-600 mt-4">
-            ✅ Your booking request has been submitted successfully!
+            ✅ {dict.booking_success}
           </p>
         )}
         {submitStatus === 'error' && (
           <p className="text-center text-red-600 mt-4">
-            ❌ An error occurred. Please try again later.
+            ❌ {dict.booking_error}
           </p>
         )}
       </div>

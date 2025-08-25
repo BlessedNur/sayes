@@ -1,9 +1,9 @@
-'use client';
+// components/sections/ContactSection.tsx (remove 'use client', static content)
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ContactSection(): JSX.Element {
+export default function ContactSection({ dict }: { dict: any }): JSX.Element {
   return (
     <section
       className="w-full mt-[35px] sm:mt-[52px] md:mt-[70px]"
@@ -18,7 +18,7 @@ export default function ContactSection(): JSX.Element {
             <div className="flex flex-col md:flex-row  justify-between items-start w-full ">
               <div className="flex flex-col justify-between items-start md:w-[70%] gap-4 sm:gap-0">
                 <h2 className="text-[24px] sm:text-[36px] md:text-[48px] font-normal leading-[29px] sm:leading-[44px] md:leading-[59px] text-[#ffffff]">
-                  Contact Us
+                  {dict.contact_us}
                 </h2>
 
                 {/* Contact Details */}
@@ -47,46 +47,47 @@ export default function ContactSection(): JSX.Element {
                         height={24}
                         className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px] ml-2"
                       />
-                      <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[23px] md:leading-[27px] text-[#ffffff] ml-[7px] sm:ml-[10px] md:ml-[14px]">
-                        info@sayesperformance.com
+                      <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[23px] md:leading-[27px] text-[#ffffff] ">
+                        info@sayesperformance.se
                       </span>
                     </div>
-                    {/* Address */}
-                  </div>
-                  <div className="flex mt-6 md:mt-0 flex-row justify-start items-center md:items-start w-full gap-2">
-                    <div className="w-[14px] sm:w-[21px] md:w-[28px] h-[1px] bg-[#ffffff] mb-[6px] sm:mb-[9px] md:mb-[12px]" />
 
-                    <Image
-                      src="/images/img_frame_yellow_a200.svg"
-                      alt=""
-                      width={24}
-                      height={24}
-                      className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px]"
-                    />
-                    <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[22px] md:leading-[26px] text-[#ffffff] ">
-                      Västanforsgatan 30 A, 214 50 
-                      <br />
-                      Malmö, Sweden
-                    </span>
+                    {/* Address */}
+                    <div className="flex flex-row justify-start items-start w-full gap-2">
+                      <div className="w-[14px] sm:w-[21px] md:w-[28px] h-[1px] bg-[#ffffff] mb-[6px] sm:mb-[9px] md:mb-[12px]" />
+
+                      <Image
+                        src="/images/img_frame_yellow_a200.svg"
+                        alt=""
+                        width={24}
+                        height={24}
+                        className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px]"
+                      />
+                      <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[22px] md:leading-[26px] text-[#ffffff] ">
+                        Västanforsgatan 30 A, 214 50
+                        <br />
+                        Malmö, Sweden
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
               {/* Newsletter */}
               <div className="flex flex-col justify-between items-start md:w-[30%] md:mt-0 mt-10 gap-4 sm:gap-0">
                 <h2 className="text-[24px] sm:text-[36px] md:text-[48px] font-normal leading-[29px] sm:leading-[44px] md:leading-[59px] text-[#ffffff]">
-                  Get in touch
+                  {dict.get_in_touch}
                 </h2>
                 <div className="w-full mt-4">
                   <p className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[21px] text-[#ffffff]">
-                    The Latest insights, resources, expert
+                    {dict.latest_insights}
                     <br />
-                    opinions and company News
+                    {dict.resources_expert}
                   </p>
                 </div>
               </div>
             </div>
             {/* Email */}
-
+            
             {/* Divider Line */}
             <div className="w-full h-[1px] bg-[#ffffff] mt-[20px]" />
             {/* Footer Links */}
@@ -96,14 +97,14 @@ export default function ContactSection(): JSX.Element {
                   href="/terms"
                   className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[22px] text-[#ffffff] hover:text-yellow-400 transition-colors"
                 >
-                  Terms & Conditions
+                  {dict.terms_conditions}
                 </Link>
                 <div className="w-[1px] h-[20px] sm:h-[30px] md:h-[40px] bg-[#ffffff]" />
                 <Link
                   href="/privacy"
                   className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[22px] text-[#ffffff] hover:text-yellow-400 transition-colors ml-[11px] sm:ml-[16px] md:ml-[22px]"
                 >
-                  Privacy Policy
+                  {dict.privacy_policy}
                 </Link>
               </div>
             </div>
