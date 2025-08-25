@@ -1,7 +1,7 @@
 export const packages = [
     {
       id: 1,
-      title: 'Membership 1',
+      title: 'Membership',
       description:
         'Our Small Group Training pairs expert coaching with the team spirit of a tight team. In groups of 4-6, you’ll tackle sport-specific circuits, exercise techniques, and goal-driven workouts designed to help you become a better athlete. Enjoy personalized feedback, friendly competition, and a supportive atmosphere.',
       price: '899 SEK/Month',
@@ -11,22 +11,22 @@ export const packages = [
         'Binding time: 2 months',
         'Notice period: 1 month',
       ],
-      image: '/new/offer1.jpg',
       type: 'membership',
+      image: '/new/offer1.jpg',
     },
     {
       id: 2,
       title: 'Group Training',
       price: '250 SEK/session',
       description:
-        'Our Small Group Training pairs expert coaching with the team spirit of a tight team. In groups of 4-6, you’ll tackle sport-specific circuits, exercise techniques, and goal-driven workouts designed to help you become a better athlete. Enjoy personalized feedback, friendly competition, and a supportive atmosphere. Join our group sessions and level up together—reserve your spot now!',
+      'Our Small Group Training pairs expert coaching with the team spirit of a tight team. In groups of 4-6, you’ll tackle sport-specific circuits, exercise techniques, and goal-driven workouts designed to help you become a better athlete. Enjoy personalized feedback, friendly competition, and a supportive atmosphere. Join our group sessions and level up together—reserve your spot now!',
       features: [
         'Small group training',
         'Flexible scheduling',
         'Professional coaching',
         'Motivational environment',
       ],
-      image: '/new/offer2.jpg',
+      image: '/new/offer3.jpg',
     },
     {
       id: 3,
@@ -40,12 +40,12 @@ export const packages = [
         'Progress tracking & analytics',
         'Flexible scheduling',
       ],
-      image: '/new/offer3.jpg',
+      image: '/new/offer2.jpg',
     },
     {
       id: 4,
-      title: 'Personal Coaching',
-      price: '5000 SEK',
+      title: 'Personal Coaching 2',
+      price: '500 SEK/Session',
       description:
         'Our Personal coaching sessions with our coaches deliver customized workout plans, one-on-one coaching, and training guidance tailored to your goals. We help you track your progress through regular meetings, receive ongoing accountability, and tap into expert support every step of the way. Ready to transform? Book your free assessment today and start your journey to peak performance!',
       features: [

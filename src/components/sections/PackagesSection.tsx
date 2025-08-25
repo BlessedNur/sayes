@@ -18,16 +18,16 @@ export default function PackagesSection(): JSX.Element {
   const router = useRouter();
 
   return (
-    <section className="w-full py-[40px] sm:py-[60px] md:py-[80px]">
+    <section className="w-full py-[40px] sm:py-[60px] md:py-[80px]" id='packages'>
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-start items-center w-full">
           <h2 className="text-[30px] sm:text-[40px] md:text-[50px] lg:text-[60px] font-bold leading-[36px] sm:leading-[48px] md:leading-[60px] lg:leading-[73px] text-[#120088] text-center mb-4 sm:mb-6 md:mb-[16px] font-inter">
             Our Packages
           </h2>
           <p className="text-[18px] sm:text-[22px] md:text-[28px] font-medium leading-[22px] sm:leading-[27px] md:leading-[33px] text-[#3c3c3c] text-center mb-[39px] sm:mb-[58px] md:mb-[78px] font-inter">
-            Professional Crafted fitness plans
+            Train smarter with personalized fitness plans
             <br />
-            for every aspiring Athlete
+             induvidually or in small groups
           </p>
 
           {/* Mobile Layout (flex-col, no Swiper) */}

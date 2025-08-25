@@ -1,8 +1,6 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import Header from '@/components/common/Header';
-import Button from '../ui/Button';
 
 export default function HeroSection(): JSX.Element {
   return (
@@ -34,11 +32,6 @@ export default function HeroSection(): JSX.Element {
       <div className="relative z-10 w-full">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between min-h-screen w-full gap-[30px] sm:gap-[40px] md:gap-[60px]">
-            {/* Header */}
-            <div className="w-full border-b border-white">
-              <Header />
-            </div>
-
             {/* Hero Content */}
             <div className="flex flex-col justify-center items-center flex-1 px-4 sm:px-0">
               <div>
@@ -48,6 +41,7 @@ export default function HeroSection(): JSX.Element {
                 <p className='text-center font-semibold text-white text-2xl font-inter'>Redefine your athletic performance with pro-level programs <br /> progress tracking and expert coaching</p>
               </div>
               <div className="m-5 flex flex-col sm:flex-row gap-4 sm:gap-5 items-center sm:items-start">
+              <Link href={'#packages'}>
                 <button
                   type="button"
                   className="font-inter flex items-center justify-center ant-btn css-16dneet ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg bg-yellow-300 text-black font-medium px-6 sm:px-8 py-3 h-12 border-none shadow-lg hover:bg-yellow-300 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
@@ -71,13 +65,15 @@ export default function HeroSection(): JSX.Element {
                     </svg>
                   </span>
                 </button>
-
+              </Link>
+              <Link href={'#offer'}>
                 <button
                   type="button"
                   className="font-inter ant-btn css-16dneet ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-lg font-medium px-6 sm:px-8 py-3 h-12 border-2 shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto bg-transparent text-yellow-300 border-yellow-300 hover:bg-yellow-300 hover:text-black"
                 >
                   <span>Get More Info</span>
                 </button>
+              </Link>
               </div>
 
             </div>

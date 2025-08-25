@@ -16,18 +16,18 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
 
   // Determine text color based on className
   const isBlackText = className.includes('text-black');
-  const textColor = isBlackText ? 'text-black' : 'text-white';
+  const textColor = isBlackText ? 'text-black' : '';
   const router = useRouter();
   const hoverColor = isBlackText ? 'hover:text-yellow-600' : 'hover:text-yellow-400';
 
   const languages = [
     { name: 'English', flag: 'en', code: 'en' },
     { name: 'Swedish', flag: 'se', code: 'sv' },
-    { name: 'French', flag: 'fr', code: 'fr' },
   ];
 
   return (
-    <header className={`w-full bg-transparent ${className}`}>
+    <header className={`w-full bg-[#010381da] text-white ${className}`} 
+    >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 py-3 lg:px-8">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center w-full">
@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
           {/* Navigation Links */}
           <div className="flex flex-row justify-between items-center space-x-6">
             <a
-              href="#contact"
+              href="/contact"
               className={`text-[19px] font-medium leading-[20px] ${textColor} cursor-pointer ${hoverColor} transition-colors`}
             >
               Contact us
@@ -136,11 +136,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
               )}
             </div>
 
-            {/* Login Button */}
-            <button className="bg-yellow-400 hover:bg-yellow-500 transition-colors p-3 flex items-center gap-2 rounded-[0px]">
-              <LockIcon className="w-4 h-4 text-gray-800" />
-              <span className="text-gray-800 font-medium">Login</span>
-            </button>
+          
           </div>
         </nav>
 
@@ -153,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
             <div className="flex justify-end mb-6">
               <button
                 onClick={() => setMenuOpen(false)}
-                className="text-white hover:text-yellow-400 transition-colors p-2"
+                className=" hover:text-yellow-400 transition-colors p-2"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -162,14 +158,14 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
             <div className="flex flex-col space-y-4">
               <a
                 href="#contact"
-                className="text-[18px] font-medium text-white cursor-pointer hover:text-yellow-400 transition-colors"
+                className="text-[18px] font-medium  cursor-pointer hover:text-yellow-400 transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 Contact us
               </a>
               <a
                 href="#offers"
-                className="text-[18px] font-medium text-white cursor-pointer hover:text-yellow-400 transition-colors"
+                className="text-[18px] font-medium  cursor-pointer hover:text-yellow-400 transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 Offers
@@ -182,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
               <div className="relative">
                 <button
                   onClick={() => setLanguageOpen(!languageOpen)}
-                  className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors cursor-pointer"
+                  className="flex items-center gap-2  hover:text-yellow-400 transition-colors cursor-pointer"
                 >
                   <div className="w-6 h-4 rounded-sm overflow-hidden">
                     <FlagIcon

@@ -119,7 +119,7 @@ export default function WhatWeOfferSection(): JSX.Element {
   };
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#f7f7f7] py-20">
+    <section ref={sectionRef} className="w-full bg-[#f7f7f7] py-20" id='offer'>
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Full content display for screens up to 800px */}
         {isMobile ? (

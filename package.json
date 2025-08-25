@@ -48,16 +48,25 @@
   },
   "dependencies": {
     "@dhiwise/component-tagger": "^1.0.10",
+    "@hookform/resolvers": "^5.2.1",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/typography": "^0.5.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.540.0",
     "next": "14.2.0",
     "nodemailer": "^7.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
     "recharts": "^2.15.2",
-    "swiper": "^11.2.10"
+    "swiper": "^11.2.10",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^4.1.1"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^5.11.1",

@@ -53,7 +53,6 @@ export default function HomePage(): JSX.Element {
       <PackagesSection />
       <WhatWeOfferSection />
       <WhyChooseSection />
-      <ContactSection />
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function ContactSection(): JSX.Element {
                         className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px] ml-2"
                       />
                       <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[23px] md:leading-[27px] text-[#ffffff] ">
-                        +44 0123 9882 88
+                        +46 72 333 87 87
                       </span>
                     </div>
                     <div className="flex flex-row justify-start items-end w-full mt-[-2px] sm:mt-[-3px] md:mt-[-4px]">
@@ -48,7 +48,7 @@ export default function ContactSection(): JSX.Element {
                         className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px] ml-2"
                       />
                       <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[23px] md:leading-[27px] text-[#ffffff] ml-[7px] sm:ml-[10px] md:ml-[14px]">
-                        contact@sayesperformance
+                        info@sayesperformance.com
                       </span>
                     </div>
                     {/* Address */}
@@ -64,9 +64,9 @@ export default function ContactSection(): JSX.Element {
                       className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px]"
                     />
                     <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[22px] md:leading-[26px] text-[#ffffff] ">
-                      Road 324, Old Road
+                      Västanforsgatan 30 A, 214 50 
                       <br />
-                      Sweden
+                      Malmö, Sweden
                     </span>
                   </div>
                 </div>
@@ -93,21 +93,14 @@ export default function ContactSection(): JSX.Element {
             <div className="flex flex-col sm:flex-row justify-start items-start w-full mt-[10px] sm:mt-[15px] md:mt-[20px] gap-4 sm:gap-0">
               <div className="flex items-center gap-4">
                 <Link
-                  href="#terms"
+                  href="/terms"
                   className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[22px] text-[#ffffff] hover:text-yellow-400 transition-colors"
                 >
                   Terms & Conditions
                 </Link>
                 <div className="w-[1px] h-[20px] sm:h-[30px] md:h-[40px] bg-[#ffffff]" />
                 <Link
-                  href="#sitemap"
-                  className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[22px] text-[#ffffff] hover:text-yellow-400 transition-colors "
-                >
-                  SiteMap
-                </Link>
-                <div className="w-[1px] h-[20px] sm:h-[30px] md:h-[40px] bg-[#ffffff]" />
-                <Link
-                  href="#privacy"
+                  href="/privacy"
                   className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[22px] text-[#ffffff] hover:text-yellow-400 transition-colors ml-[11px] sm:ml-[16px] md:ml-[22px]"
                 >
                   Privacy Policy

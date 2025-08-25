@@ -54,7 +54,7 @@ const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElemen
     xl: 'px-5 py-3 text-lg sm:px-6 sm:py-4 sm:text-xl md:text-xl lg:text-2xl'
   };
 
-  const responsiveRadius = 'rounded sm:rounded-md md:rounded-lg';
+  const responsiveRadius = 'rounded-none sm:rounded-none md:rounded-none';
   const responsiveFocus = 'focus:ring-2 sm:focus:ring-2 md:focus:ring-4';
 
   const LoadingSpinner = () => (
