@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import FlagIcon from '@/components/ui/FlagIcons';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface HeaderProps {
   className?: string;
@@ -26,20 +27,22 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
   ];
 
   return (
-    <header className={`w-full bg-[#010381da] text-white ${className}`} 
+    <header className={`w-full bg-[#010381da] text-white ${className}`}
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 py-3 lg:px-8">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center w-full">
           {/* Logo */}
           <div className="w-[140px] h-[60px] grid place-items-center">
-            <Image
-              src="/sayeslogo.png"
-              alt="Logo"
-              width={100}
-              height={100}
-              className="w-full h-full object-contain"
-            />
+            <Link href="/">
+              <Image
+                src="/sayeslogo.png"
+                alt="Logo"
+                width={100}
+                height={100}
+                className="w-full h-full object-contain"
+              />
+            </Link>
           </div>
 
           {/* Hamburger Menu Button */}
@@ -56,16 +59,18 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
         <nav className="hidden md:flex justify-between items-center w-full">
           {/* Logo */}
           <div className="w-[200px] h-[80px] grid place-items-center">
-            <Image
-              src="/sayeslogo.png"
-              alt="Logo"
-              width={100}
-              height={100}
-              className="w-full h-full object-cover cursor-pointer"
-              onClick={() => {
-                router.push('/');
-              }}
-            />
+            <Link href="/">
+              <Image
+                src="/sayeslogo.png"
+                alt="Logo"
+                width={100}
+                height={100}
+                className="w-full h-full object-cover cursor-pointer"
+                onClick={() => {
+                  router.push('/');
+                }}
+              />
+            </Link>
           </div>
 
           {/* Navigation Links */}
@@ -96,9 +101,8 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
                   <FlagIcon
                     country={
                       languages.find((lang) => lang.name === selectedLanguage)?.flag as
-                        | 'en'
-                        | 'se'
-                        | 'fr'
+                      | 'en'
+                      | 'se'
                     }
                     className="w-full h-full"
                   />
@@ -119,9 +123,8 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
                         setSelectedLanguage(language.name);
                         setLanguageOpen(false);
                       }}
-                      className={`w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-100 transition-colors ${
-                        selectedLanguage === language.name ? 'bg-gray-50' : ''
-                      }`}
+                      className={`w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-100 transition-colors ${selectedLanguage === language.name ? 'bg-gray-50' : ''
+                        }`}
                     >
                       <div className="w-6 h-4 rounded-sm overflow-hidden">
                         <FlagIcon
@@ -136,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
               )}
             </div>
 
-          
+
           </div>
         </nav>
 
@@ -157,7 +160,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
             {/* Mobile Navigation Links */}
             <div className="flex flex-col space-y-4">
               <a
-                href="#contact"
+                href="/contact"
                 className="text-[18px] font-medium  cursor-pointer hover:text-yellow-400 transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
@@ -184,9 +187,8 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
                     <FlagIcon
                       country={
                         languages.find((lang) => lang.name === selectedLanguage)?.flag as
-                          | 'en'
-                          | 'se'
-                          | 'fr'
+                        | 'en'
+                        | 'se'
                       }
                       className="w-full h-full"
                     />
@@ -207,13 +209,12 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
                           setSelectedLanguage(language.name);
                           setLanguageOpen(false);
                         }}
-                        className={`w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-100 transition-colors ${
-                          selectedLanguage === language.name ? 'bg-gray-50' : ''
-                      }`}
+                        className={`w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-100 transition-colors ${selectedLanguage === language.name ? 'bg-gray-50' : ''
+                          }`}
                       >
                         <div className="w-6 h-4 rounded-sm overflow-hidden">
                           <FlagIcon
-                            country={language.flag as 'en' | 'se' | 'fr'}
+                            country={language.flag as 'en' | 'se'}
                             className="w-full h-full"
                           />
                         </div>
@@ -224,11 +225,6 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
                 )}
               </div>
 
-              {/* Mobile Login Button */}
-              <button className="bg-yellow-400 hover:bg-yellow-500 transition-colors p-3 flex items-center gap-2 rounded-[0px] w-full justify-center">
-                <LockIcon className="w-4 h-4 text-gray-800" />
-                <span className="text-gray-800 font-medium">Login</span>
-              </button>
             </div>
           </div>
         </div>
