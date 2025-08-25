@@ -136,9 +136,9 @@ export default function BookingForm({ packageId, packageTitle, dict }: BookingFo
   const errorClass = 'mt-1 text-sm text-red-600';
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-white shadow-lg p-8">
-        <h1 className="text-2xl font-bold mb-6 text-center">{dict.book_your_session}</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-full max-w-5xl bg-white p-8">
+        {/* <h1 className="text-2xl font-bold mb-6 text-center">{dict.book_your_session}</h1> */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>

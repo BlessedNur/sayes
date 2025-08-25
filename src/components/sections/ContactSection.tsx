@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function ContactSection({ dict }: { dict: any }): JSX.Element {
   return (
     <section
-      className="w-full mt-[35px] sm:mt-[52px] md:mt-[70px]"
+      className="w-full"
       style={{
         background: 'linear-gradient(180deg, #040022 0%, #120088 100%)',
       }}
