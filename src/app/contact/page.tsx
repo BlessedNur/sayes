@@ -74,13 +74,6 @@ const ContactUs = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div className="space-y-8">
-              <div>
-                <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
-                <p className="">
-                  Get in touch with one of our coaches for personalized guidance and support.
-                </p>
-              </div>
-
               <Card className=" border-blue-900 backdrop-blur-sm rounded-none shadow-none">
                 <CardContent className="pt-6">
                   <div className="space-y-6">
