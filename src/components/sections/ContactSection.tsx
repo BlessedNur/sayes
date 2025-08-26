@@ -1,114 +1,100 @@
-// components/sections/ContactSection.tsx (remove 'use client', static content)
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function ContactSection({ dict }: { dict: any }): JSX.Element {
+
+   const pathname = usePathname();
+    const currentLocale = pathname.split('/')[1] || 'en';
+
   return (
-    <section
-      className="w-full"
-      style={{
-        background: 'linear-gradient(180deg, #040022 0%, #120088 100%)',
-      }}
-    >
-      <div className="w-full max-w-[1440px] mx-auto">
-        <div className="flex flex-row justify-start items-end w-full p-[50px] sm:p-[75px] md:p-[100px] rounded-[5px]">
-          <div className="flex flex-col gap-[8px] sm:gap-[12px] md:gap-[16px] justify-start items-center w-full mt-[13px] sm:mt-[19px] md:mt-[26px]">
-            {/* Header Row */}
-            <div className="flex flex-col md:flex-row  justify-between items-start w-full ">
-              <div className="flex flex-col justify-between items-start md:w-[70%] gap-4 sm:gap-0">
-                <h2 className="text-[24px] sm:text-[36px] md:text-[48px] font-normal leading-[29px] sm:leading-[44px] md:leading-[59px] text-[#ffffff]">
-                  {dict.contact_us}
-                </h2>
-
-                {/* Contact Details */}
-                <div className="flex flex-col md:flex-row items-center justify-between w-full">
-                  <div className="flex flex-col gap-4 mt-6 justify-start items-center w-full">
-                    {/* Phone */}
-                    <div className="flex flex-row justify-start items-start w-full">
-                      <div className="w-[14px] sm:w-[21px] md:w-[28px] h-[1px] bg-[#ffffff] mt-[5px] sm:mt-[7px] md:mt-[10px]" />
-                      <Image
-                        src="/images/img_frame_yellow_a200.svg"
-                        alt=""
-                        width={24}
-                        height={24}
-                        className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px] ml-2"
-                      />
-                      <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[23px] md:leading-[27px] text-[#ffffff] ">
-                        +46 72 333 87 87
-                      </span>
-                    </div>
-                    <div className="flex flex-row justify-start items-end w-full mt-[-2px] sm:mt-[-3px] md:mt-[-4px]">
-                      <div className="w-[14px] sm:w-[21px] md:w-[28px] h-[1px] bg-[#ffffff] mb-[6px] sm:mb-[9px] md:mb-[12px]" />
-                      <Image
-                        src="/images/img_frame_yellow_a200_24x24.svg"
-                        alt=""
-                        width={24}
-                        height={24}
-                        className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px] ml-2"
-                      />
-                      <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[23px] md:leading-[27px] text-[#ffffff] ">
-                        info@sayesperformance.se
-                      </span>
-                    </div>
-
-                    {/* Address */}
-                    <div className="flex flex-row justify-start items-start w-full gap-2">
-                      <div className="w-[14px] sm:w-[21px] md:w-[28px] h-[1px] bg-[#ffffff] mb-[6px] sm:mb-[9px] md:mb-[12px]" />
-
-                      <Image
-                        src="/images/img_frame_yellow_a200.svg"
-                        alt=""
-                        width={24}
-                        height={24}
-                        className="w-[18px] h-[18px] sm:w-[21px] sm:h-[21px] md:w-[24px] md:h-[24px]"
-                      />
-                      <span className="text-[16px] sm:text-[19px] md:text-[22px] font-normal leading-[19px] sm:leading-[22px] md:leading-[26px] text-[#ffffff] ">
-                        Västanforsgatan 30 A, 214 50
-                        <br />
-                        Malmö, Sweden
-                      </span>
-                    </div>
-                  </div>
-                </div>
+    <section className="w-full bg-gradient-to-b from-[#040022] to-[#120088] py-12 sm:py-16 md:py-20">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
+          {/* Contact Details Section */}
+          <div className="flex flex-col w-full md:w-2/3 gap-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight">
+              {dict.contact_us}
+            </h2>
+            <div className="flex flex-col gap-6">
+              {/* Phone */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-px bg-white" />
+                <Image
+                  src="/images/img_frame_yellow_a200.svg"
+                  alt="Phone icon"
+                  width={24}
+                  height={24}
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                />
+                <span className="text-base sm:text-lg md:text-xl text-white">
+                  +46 72 333 87 87
+                </span>
               </div>
-              {/* Newsletter */}
-              <div className="flex flex-col justify-between items-start md:w-[30%] md:mt-0 mt-10 gap-4 sm:gap-0">
-                <h2 className="text-[24px] sm:text-[36px] md:text-[48px] font-normal leading-[29px] sm:leading-[44px] md:leading-[59px] text-[#ffffff]">
-                  {dict.get_in_touch}
-                </h2>
-                <div className="w-full mt-4">
-                  <p className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[21px] text-[#ffffff]">
-                    {dict.latest_insights}
-                    <br />
-                    {dict.resources_expert}
-                  </p>
-                </div>
+              {/* Email */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-px bg-white" />
+                <Image
+                  src="/images/img_frame_yellow_a200_24x24.svg"
+                  alt="Email icon"
+                  width={24}
+                  height={24}
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                />
+                <span className="text-base sm:text-lg md:text-xl text-white">
+                  info@sayesperformance.se
+                </span>
               </div>
-            </div>
-            {/* Email */}
-            
-            {/* Divider Line */}
-            <div className="w-full h-[1px] bg-[#ffffff] mt-[20px]" />
-            {/* Footer Links */}
-            <div className="flex flex-col sm:flex-row justify-start items-start w-full mt-[10px] sm:mt-[15px] md:mt-[20px] gap-4 sm:gap-0">
-              <div className="flex items-center gap-4">
-                <Link
-                  href="/terms"
-                  className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[22px] text-[#ffffff] hover:text-yellow-400 transition-colors"
-                >
-                  {dict.terms_conditions}
-                </Link>
-                <div className="w-[1px] h-[20px] sm:h-[30px] md:h-[40px] bg-[#ffffff]" />
-                <Link
-                  href="/privacy"
-                  className="text-[14px] sm:text-[16px] md:text-[18px] font-normal leading-[17px] sm:leading-[19px] md:leading-[22px] text-[#ffffff] hover:text-yellow-400 transition-colors ml-[11px] sm:ml-[16px] md:ml-[22px]"
-                >
-                  {dict.privacy_policy}
-                </Link>
+              {/* Address */}
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-px bg-white mt-2" />
+                <Image
+                  src="/images/img_frame_yellow_a200.svg"
+                  alt="Address icon"
+                  width={24}
+                  height={24}
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                />
+                <span className="text-base sm:text-lg md:text-xl text-white">
+                  Västanforsgatan 30 A, 214 50<br />
+                  Malmö, Sweden
+                </span>
               </div>
             </div>
           </div>
+
+          {/* Newsletter Section */}
+          <div className="flex flex-col w-full md:w-1/3 mt-8 md:mt-0 gap-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight">
+              {dict.get_in_touch}
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed">
+              {dict.latest_insights}<br />
+              {dict.resources_expert}
+            </p>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-white/30 my-8" />
+
+        {/* Footer Links */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+          <Link
+            href={`/${currentLocale}/terms`}
+            className="text-sm sm:text-base md:text-lg text-white hover:text-amber-400 transition-colors duration-200"
+          >
+            {dict.terms_conditions}
+          </Link>
+          <div className="w-px h-6 bg-white/30 hidden sm:block" />
+          <Link
+            href={`/${currentLocale}/privacy`}
+            className="text-sm sm:text-base md:text-lg text-white hover:text-amber-400 transition-colors duration-200"
+          >
+            {dict.privacy_policy}
+          </Link>
         </div>
       </div>
     </section>

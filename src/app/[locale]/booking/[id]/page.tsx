@@ -1,8 +1,10 @@
 import React from 'react';
 import { getDictionary } from '@/lib/get-dictionary';
 import type { Locale } from '@/lib/locales';
+import BookingForm from '../../../../components/booking/BookingForm';
 import { packages } from '@/app/data/package';
-import BookingForm from '@/components/booking/BookingForm';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 export async function generateStaticParams() {
   const paths = [];
@@ -21,7 +23,37 @@ export default async function BookingPage({
 }) {
   const { locale, id } = params;
   const dict = await getDictionary(locale, 'booking-form');
-  const pkg = packages.find((p) => p.id === parseInt(id));
+  // Load package data from locale-specific JSON file using file system
+  let packages = [];
+  try {
+    // Updated file path to use public/locales/<locale>/packages.json
+    const filePath = path.join(process.cwd(), 'public', 'locales', locale, 'packages.json');
+    const jsonData = await fs.readFile(filePath, 'utf-8');
+    packages = JSON.parse(jsonData);
+  } catch (error: any) {
+    console.error(`Error reading package data for locale '${locale}':`, error);
+    // Fallback to English if locale-specific file is not available
+    try {
+      const fallbackPath = path.join(process.cwd(), 'public', 'locales', 'en', 'packages.json');
+      const fallbackJsonData = await fs.readFile(fallbackPath, 'utf-8');
+      packages = JSON.parse(fallbackJsonData);
+    } catch (fallbackError: any) {
+      console.error(`Error reading fallback package data for locale 'en':`, fallbackError);
+      return <p>Package data not available</p>;
+    }
+  }
+
+  // Check if packages is an array; if not, check if packages.packages is an array
+  if (!Array.isArray(packages)) {
+    if (packages && Array.isArray(packages.packages)) {
+      packages = packages.packages;
+    } else {
+      console.error('Packages data is not an array:', packages);
+      return <p>Invalid package data</p>;
+    }
+  }
+
+  const pkg = packages.find((p: { id: string | number }) => p.id.toString() === id);
   console.log("Package ID:", id, "Found Package:", pkg);
 
   if (!pkg) {
@@ -53,12 +85,16 @@ export default async function BookingPage({
             <p className="text-gray-700 mb-6">{pkg.description}</p>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">What's included:</h3>
             <ul className="space-y-2">
-              {pkg.features.map((feature, index) => (
-                <li key={index} className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span className="text-gray-700">{feature}</span>
-                </li>
-              ))}
+              {pkg.features && pkg.features.length > 0 ? (
+                pkg.features.map((feature: string, index: number) => (
+                  <li key={index} className="flex items-center">
+                    <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span className="text-gray-700">{feature}</span>
+                  </li>
+                ))
+              ) : (
+                <li className="text-gray-500">{dict.no_features_available}</li>
+              )}
             </ul>
           </div>
         </div>

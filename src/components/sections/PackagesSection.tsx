@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { packages } from '@/app/data/package';
 
 // Import Swiper styles
@@ -16,6 +16,8 @@ import 'swiper/css/pagination';
 
 export default function PackagesSection({ dict }: { dict: any }): JSX.Element {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+   const pathname = usePathname();
+    const currentLocale = pathname.split('/')[1] || 'en';
   const router = useRouter();
 
   return (
@@ -39,7 +41,7 @@ export default function PackagesSection({ dict }: { dict: any }): JSX.Element {
                 className={`relative w-full h-[314px] overflow-hidden cursor-pointer rounded-lg shadow-lg ${
                   pkg.type === 'membership' ? 'bg-[#151515]' : ''
                 }`}
-                onClick={() => router.push(`/booking/${pkg.id}`)}
+                onClick={() => router.push(`/${currentLocale}/booking/${pkg.id}`)}
               >
                 {/* Always show image and hover content for mobile */}
                 <Image src={pkg.image} alt={pkg.title} fill className="object-cover" />
@@ -186,7 +188,7 @@ export default function PackagesSection({ dict }: { dict: any }): JSX.Element {
                               variant="secondary"
                               size="sm"
                               className="!rounded-[0px] w-full"
-                              onClick={() => router.push(`/booking/${pkg.id}`)}
+                              onClick={() => router.push(`/${currentLocale}/booking/${pkg.id}`)}
                             >
                               {dict.book_now}
                             </Button>

@@ -11,8 +11,8 @@ interface HeaderProps {
 }
 
 const languages = [
-  { code: 'en', name: 'English', flag: '/flags/en.png' },
-  { code: 'sv', name: 'Svenska', flag: '/flags/sv.png' },
+  { code: 'en', name: 'English', flag: '/images/british.png' },
+  { code: 'sv', name: 'Svenska', flag: '/images/swidish.png' },
   // Add more languages as needed
 ];
 
@@ -39,6 +39,20 @@ const Header: React.FC<HeaderProps> = ({ className = '', dict }) => {
   };
 
   const currentLang = languages.find(lang => lang.code === currentLocale) || languages[0];
+
+  // Add flag links for language switching in the header
+  function LanguageSwitcher() {
+    return (
+      <div className="flex space-x-4">
+        <a href="/en">
+          <Image src="/images/british.png" alt="English" width={24} height={24} />
+        </a>
+        <a href="/sv">
+          <Image src="/images/swidish.png" alt="Swedish" width={24} height={24} />
+        </a>
+      </div>
+    );
+  }
 
   return (
     <header className={`w-full ${bgClass} ${textColor} shadow-lg transition-all duration-300 ${className}`}>
@@ -73,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({ className = '', dict }) => {
         <nav className="hidden md:flex justify-between items-center w-full">
           {/* Logo */}
           <div className="w-[180px] h-[70px] grid place-items-center">
-            <Link href="/">
+            <Link href={`/${currentLang.code}`}>
               <Image
                 src="/sayeslogo.png"
                 alt="Logo"
@@ -88,7 +102,7 @@ const Header: React.FC<HeaderProps> = ({ className = '', dict }) => {
           {/* Navigation Links */}
           <div className="flex flex-row items-center space-x-10">
             <Link
-              href="/contact"
+              href={`/${currentLang.code}/contact`}
               className={`text-lg font-medium ${textColor} ${hoverColor} transition-colors duration-200 tracking-wide uppercase`}
             >
               {dict.contact_us}

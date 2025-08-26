@@ -2,6 +2,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Calendar, ChevronDown, Send } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 interface FormData {
   fullName: string;
@@ -76,7 +77,7 @@ export default function BookingForm({ packageId, packageTitle, dict }: BookingFo
     }));
     // Clear the error for the field once the user starts typing
     if (errors[field as keyof FormErrors]) {
-        setErrors((prev) => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 
@@ -129,7 +130,8 @@ export default function BookingForm({ packageId, packageTitle, dict }: BookingFo
       setIsSubmitting(false);
     }
   };
-
+  const pathname = usePathname();
+  const currentLocale = pathname.split('/')[1] || 'en';
   const inputClass = 'w-full px-4 py-3 border border-gray-300 rounded-none bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none';
   const selectClass = 'w-full px-4 py-3 border border-gray-300 rounded-none bg-white appearance-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none';
   const labelClass = 'block mb-2 text-sm font-medium text-gray-700';
