@@ -2,10 +2,12 @@
 import '@/styles/index.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ContactSection } from '@/components/sections';
-import type { Locale } from '@/lib/i18n';
+import { ContactSection,} from '@/components/sections';
+import type { Locale } from '@/lib/locales';
 import { getDictionary } from '@/lib/get-dictionary';
-import { locales } from '@/lib/i18n';
+import { locales } from '@/lib/locales';
+import { appWithTranslation } from 'next-i18next';
+import type { ReactNode } from 'react';
 import Header from '@/components/common/Header';
 
 const inter = Inter({
@@ -26,19 +28,24 @@ export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({
+async function RootLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: { locale: Locale };
+  children: ReactNode;
+  params: Promise<{ locale: Locale }>;
 }) {
-  const { locale } = params;
+  const { locale } = await params; // Unwrap the Promise
   const commonDict = await getDictionary(locale, 'common');
   const contactDict = await getDictionary(locale, 'contact');
 
   return (
     <html lang={locale} className={inter.variable}>
+      <head>
+        {locales.map((loc) => (
+          <link key={loc} rel="alternate" hrefLang={loc} href={`/${loc}`} />
+        ))}
+      </head>
       <body className="font-inter">
         <div className="w-full border-b border-white">
           <Header dict={commonDict} />
@@ -53,3 +60,5 @@ export default async function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;
