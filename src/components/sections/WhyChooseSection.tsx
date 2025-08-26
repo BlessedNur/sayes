@@ -7,10 +7,10 @@ export default function WhyChooseSection({ dict }: { dict: any }): JSX.Element {
     <section className="w-full py-8 sm:py-12 md:py-16 mb-10">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-start items-center lg:items-start w-full gap-10">
-          
+
           {/* Left Image */}
           <div className="relative w-full max-w-[700px]">
-            <div className="absolute inset-0 bg-[#f7f7f7] rounded-[5px] hidden lg:block top-[12px]" />
+            <div className="absolute inset-0 rounded-[5px] hidden lg:block top-[12px]" />
             <img
               src="https://sayesperformance.se/assets/banner-JN9Rbn98.gif"
               alt="Sayes Performance Training"
